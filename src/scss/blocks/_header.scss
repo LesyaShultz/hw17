@@ -1,0 +1,151 @@
+.header {
+  padding: 20px 0;
+  font-size: 20px;
+  position: relative;
+
+  &:active {
+    .nav {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .burger-btn {
+      &::before {
+        transform: rotate(45deg);
+        top: 13px;
+      }
+
+      &::after {
+        transform: rotate(-45deg);
+        bottom: 13px;
+      }
+    }
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.nav {
+  @include media("<tablet") {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: all ease-in-out 0.5s;
+  }
+  &__list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+
+    @include media("<tablet") {
+      flex-direction: column;
+    }
+  }
+
+  &__item {
+    padding: 0 10px;
+    position: relative;
+
+    @include media("<tablet") {
+      padding-bottom: 30px;
+    }
+  }
+
+  &__link {
+    display: block;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: black;
+    background-color: #689c8a;
+    padding: 9px 15px;
+
+    transition: all ease-in-out 0.3s;
+
+    &:hover {
+      opacity: 0.5;
+      & + .nav__sub-menu {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+  &__sub-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all ease-in-out 0.3s;
+    list-style: none;
+
+    &:hover {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+  &__sub-item {
+    padding: 5px;
+  }
+  &__sub-link {
+    @extend .nav__link;
+    font-size: 16px;
+  }
+}
+
+.burger-btn {
+  display: none;
+
+  @include media("<tablet") {
+    display: block;
+    position: relative;
+    z-index: 2;
+    width: 50px;
+    height: 30px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      height: 3px;
+      left: 0;
+      width: 100%;
+      background-color: #689c8a;
+      transition: all ease-in-out 0.3s;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      height: 3px;
+      left: 0;
+      width: 100%;
+      background-color: #689c8a;
+      transition: all ease-in-out 0.3s;
+    }
+
+    span {
+      position: absolute;
+      top: 45%;
+      left: 0;
+      height: 3px;
+      width: 100%;
+      transform: translateY(50%);
+      background-color: #689c8a;
+      transition: all ease-in-out 0.3s;
+    }
+  }
+}
